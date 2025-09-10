@@ -37,10 +37,13 @@ func BundleQueryer() (Queryer, error) {
 // IsHoliday checks given date is holiday or not.
 //
 // Deprecated: Use Queryer.IsHoliday instead.
-func IsHoliday(date time.Time) (bool, error) {
+func IsHoliday(date time.Time) (Result, error) {
 	err := checkInitBook()
 	if err != nil {
-		return false, err
+		return Result{
+			Res: false,
+			Name: "",
+		}, err
 	}
 
 	return b.IsHoliday(date)

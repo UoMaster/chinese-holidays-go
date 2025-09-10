@@ -55,7 +55,7 @@ func NewCacheQueryer() (Queryer, error) {
 	return cache, nil
 }
 
-func (c *cache) IsHoliday(date time.Time) (bool, error) {
+func (c *cache) IsHoliday(date time.Time) (Result, error) {
 	c.l.RLock()
 	b, err := c.b.IsHoliday(date)
 	c.l.RUnlock()

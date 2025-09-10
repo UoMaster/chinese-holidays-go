@@ -21,7 +21,7 @@ func TestNewCacheQueryer(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if !r {
+	if !r.Res {
 		t.Fail()
 	}
 }
@@ -52,7 +52,7 @@ func TestNewCacheQueryer_update(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if !r {
+	if !r.Res {
 		t.Fail()
 	}
 }

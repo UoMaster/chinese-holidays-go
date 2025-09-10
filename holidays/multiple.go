@@ -14,7 +14,7 @@ func NewMultipleQueryer(queryers ...Queryer) Queryer {
 	return multipleQueryer{queryers}
 }
 
-func (m multipleQueryer) IsHoliday(date time.Time) (b bool, err error) {
+func (m multipleQueryer) IsHoliday(date time.Time) (b Result, err error) {
 	for _, q := range m.queryers {
 		b, err = q.IsHoliday(date)
 		if err == nil {
@@ -22,7 +22,7 @@ func (m multipleQueryer) IsHoliday(date time.Time) (b bool, err error) {
 		}
 	}
 
-	return false, err
+	return b, err
 }
 
 func (m multipleQueryer) IsWorkingday(date time.Time) (b bool, err error) {

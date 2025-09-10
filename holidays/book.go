@@ -9,6 +9,11 @@ type book struct {
 	index  map[string]event
 }
 
+type Result struct {
+	Res  bool
+	Name string
+}
+
 func newBookfromEvents(events []event) (book, error) {
 	index := make(map[string]event)
 	for _, e := range events {
@@ -24,14 +29,22 @@ func newBookfromEvents(events []event) (book, error) {
 	return book{events, index}, nil
 }
 
-func (b *book) IsHoliday(d time.Time) (bool, error) {
+func (b *book) IsHoliday(d time.Time) (Result, error) {
 	e := b.findEvent(d)
 
 	if e == nil {
-		return isWeekend(d), nil
+		// 获取具体周六还是周日
+		name := ""
+		day := d.Weekday()
+		if day == 6 {
+			name = "周六"
+		} else if day == 0 {
+			name = "周日"
+		}
+		return Result{Res: isWeekend(d), Name: name}, nil
 	}
 
-	return e.isHoliday(), nil
+	return Result{Res: e.isHoliday(), Name: e.Name}, nil
 }
 
 func (b *book) IsWorkingday(d time.Time) (bool, error) {

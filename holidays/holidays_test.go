@@ -12,7 +12,7 @@ func TestIsHoliday(t *testing.T) {
 		t.Error(err)
 	}
 
-	if !result {
+	if !result.Res {
 		t.Fail()
 	}
 }

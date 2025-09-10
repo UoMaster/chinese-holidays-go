@@ -25,7 +25,7 @@ func TestNewMultipleQueryer(t *testing.T) {
 		t.Error(err)
 		t.FailNow()
 	}
-	if !r {
+	if !r.Res {
 		t.Fail()
 	}
 }
